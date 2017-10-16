@@ -27,8 +27,9 @@ module.exports = function(ToneAnalyzer) {
             let recent = data.utterances_tone.length
             if (data.utterances_tone){
               data.utterances_tone[recent-1].tones.forEach((tone) =>{
+                console.log(tone)
                 if (tone.score > highScore) {
-                  dominantEmotion = tone.tone_name
+                  dominantEmotion = tone.tone_id
                   highScore = tone.score
                 }
               })
@@ -53,7 +54,7 @@ module.exports = function(ToneAnalyzer) {
               }
               for (let n in utterances[i].tones){
                 for (let a in columns){
-                  if (utterances[i].tones[n].tone_name === columns[a][0]){
+                  if (utterances[i].tones[n].tone_id === columns[a][0]){
                     columns[a].splice(Number(i)+1, 1, utterances[i].tones[n].score)
                   }
                 }
@@ -90,17 +91,17 @@ var calcAverages = function(utterances){
       for (let n in utterances[i].tones){
         if (utterances[i].tones[n].tone_name === "sad"){
           sadTones.push(utterances[i].tones[n])
-        } else if (utterances[i].tones[n].tone_name === "frustrated"){
+        } else if (utterances[i].tones[n].tone_id === "frustrated"){
           frustTones.push(utterances[i].tones[n])
-        } else if (utterances[i].tones[n].tone_name === "satisfied"){
+        } else if (utterances[i].tones[n].tone_id === "satisfied"){
           satTones.push(utterances[i].tones[n])
-        } else if (utterances[i].tones[n].tone_name === "excited"){
+        } else if (utterances[i].tones[n].tone_id === "excited"){
           excTones.push(utterances[i].tones[n])
-        } else if (utterances[i].tones[n].tone_name === "polite"){
+        } else if (utterances[i].tones[n].tone_id === "polite"){
           polTones.push(utterances[i].tones[n])
-        } else if (utterances[i].tones[n].tone_name === "impolite"){
+        } else if (utterances[i].tones[n].tone_id === "impolite"){
           impolTones.push(utterances[i].tones[n])
-        } else if (utterances[i].tones[n].tone_name === "sympathetic"){
+        } else if (utterances[i].tones[n].tone_id== "sympathetic"){
           sympTones.push(utterances[i].tones[n])
         }
       }

@@ -48,3 +48,18 @@ p{
 .bar-margin{
   margin-top:5px;
 }
+.emotionBar{
+  font-size:12px;
+  font-family: "Helvetica Neue",Helvetica,"Open Sans",Arial,"Lucida Grande",Roboto,sans-serif;
+  font-weight: 200;
+  color:black;
+  text-align: right;
+  margin-top:4px;
+  float:right;
+}
+.anger{
+  background-color:red;
+}
+.sadness{
+  background-color:gray;
+}

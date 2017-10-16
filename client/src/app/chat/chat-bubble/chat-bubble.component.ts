@@ -10,7 +10,7 @@ import {
   animate,
   keyframes } from '@angular/core'
 
-import { ChatMessage } from '../message'
+import { ChatMessage } from '../classes/message'
 
 @Component({
   selector: 'wsl-chat-bubble',
@@ -42,9 +42,7 @@ export class ChatBubbleComponent {
   @Output() moreResults: EventEmitter<boolean> = new EventEmitter <boolean>()
   canTrigger: boolean = true
   nextResult() {
-    console.log('clicked next')
     if (this.canTrigger) {
-      console.log('can trigger')
       this.moreResults.emit(true)
       this.canTrigger = false
     }

@@ -3,8 +3,11 @@ export class ChatMessage {
     public message: string,
     public speaker: string,
     public index: number,
-    public type: string,
-    public score: number
+    public emotion: string,
+    public emoConfidence: number,
+    public emoStrong: boolean,
+    public score: number,
+    public type: string
   ) {
     // Lett blank
   }

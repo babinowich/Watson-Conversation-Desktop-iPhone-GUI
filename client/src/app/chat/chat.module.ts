@@ -6,9 +6,9 @@ import { AuthModule } from '../auth/auth.module'
 
 import { MatProgressBarModule, MatTooltipModule } from '@angular/material'
 
-import { WatsonConversationService } from './watson-conversation.service'
+import { WatsonConversation } from './conversation.service'
 import { WatsonDiscovery } from './discovery.service'
-
+import { WatsonToneAnalyzer } from './tone-analyzer.service'
 import { ChatComponent } from './chat.component'
 import { ChatInputComponent } from './chat-input/chat-input.component'
 import { ChatBubbleComponent } from './chat-bubble/chat-bubble.component'
@@ -28,8 +28,9 @@ import { ChatBubbleComponent } from './chat-bubble/chat-bubble.component'
     MatTooltipModule
   ],
   providers: [
-    WatsonConversationService,
-    WatsonDiscovery
+    WatsonConversation,
+    WatsonDiscovery,
+    WatsonToneAnalyzer
   ],
   exports: [ChatComponent]
 })

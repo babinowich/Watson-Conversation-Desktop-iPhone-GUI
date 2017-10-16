@@ -12,6 +12,6 @@
     <wsl-chat-bubble *ngFor='let message of convoArray' [message]="message" (moreResults)="showMore($event)"></wsl-chat-bubble>
   </div>
   <div class="row" id="input">
-    <wsl-chat-input (sendMessage)="postMessage($event)" (textPresent)="postPending($event)" id="input_box"></wsl-chat-input>
+    <wsl-chat-input (sendMessage)="submitPressed($event)" (textPresent)="postPending($event)" id="input_box"></wsl-chat-input>
   </div>
 </div>

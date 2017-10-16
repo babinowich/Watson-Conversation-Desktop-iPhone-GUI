@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Rx'
 import { LoopbackLoginService } from '../auth/loopback/lb-login.service'
 
 @Injectable()
-export class WatsonConversationService {
+export class WatsonConversation {
   private accessToken: string
   private url: string
 
