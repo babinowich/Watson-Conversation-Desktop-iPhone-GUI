@@ -1,0 +1,42 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory",
+    "file": "mem_db.json"
+  },
+  "watson-conversation": {
+    "name": "watson-conversation",
+    "connector": "rest",
+    "operations": [
+      {
+        "template": {
+          "method": "POST",
+          "url": "${CONVERSATION_API_URL}",
+          "body": "{input='':any}",
+          "responsePath": "$"
+        },
+        "functions": {
+          "message": [
+            "input"
+          ]
+        }
+      }
+    ],
+    "crud": false,
+    "options": {
+      "headers": {
+        "accept": "application/json",
+        "content-type": "application/json"
+      }
+    },
+    "auth": {
+      "user": "${CONVERSATION_API_USER}",
+      "password": "${CONVERSATION_API_PASSWORD}"
+    }
+  },
+  "tone-analyzer": {
+    "url": "${TONE_API_URL}",
+    "name": "tone-analyzer",
+    "connector": "rest"
+  }
+}

@@ -1,0 +1,71 @@
+#watsonOrb{
+  height:29px;
+  width:29px;
+  float:left;
+  position:relative;
+  top:-4px;
+  margin-right:5px;
+  margin-top:5px;
+  margin-left:5px;
+  margin-bottom:3px;
+}
+
+#input{
+  margin-left:4px;
+  position: absolute;
+  bottom:2px;
+}
+
+#input_box{
+  width: 100%;
+}
+
+#scrolling-chat-box{
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 280px;
+  padding:0px;
+  padding-top:6px;
+}
+
+.chatWidget{
+  background-color:white;
+  margin:0px;
+  height:322px;
+  width:204px;
+  padding-left:6px;
+  padding-right:6px;
+}
+
+#chatHeader{
+  background-color:#152935;
+  color:white;
+  height:36px;
+  width:204px;
+  margin:0px;
+}
+
+.sub-text{
+  font-size:16px;
+}
+
+#refreshButton{
+  font-size:15px;
+  color:white;
+  transition: .3s all;
+  margin-left:60px;
+  cursor:pointer;
+  margin-top:9px;
+}
+
+#refreshButton:hover{
+  font-size:16px;
+  color:#D867EF;
+}
+
+#refreshButton:active{
+  -ms-transform: rotate(50deg);
+  -webkit-transform: rotate(50deg);
+  transform: rotate(50deg);
+  color:#0EF7C8;
+}

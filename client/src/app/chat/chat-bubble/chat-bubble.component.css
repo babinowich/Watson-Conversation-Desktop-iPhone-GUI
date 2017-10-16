@@ -1,0 +1,50 @@
+.watsontext,
+.humantext {
+    line-height: 100%;
+    display: block;
+    position: relative;
+    padding:8px 9px 8px 9px;
+    margin-bottom: 0.7em;
+    clear: both;
+    max-width:75%;
+    line-height: 120%;
+    font-size:12px;
+    font-family: "Helvetica Neue",Helvetica,"Open Sans",Arial,"Lucida Grande",Roboto,sans-serif;
+    font-weight: normal;
+}
+p{
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.watsontext {
+    float: left;
+    margin-right:5%;
+    background-color:#E3E6E8;
+    color:#263238;
+    border-radius:10px 10px 10px 0px;
+}
+.humantext {
+    float:right;
+    margin-left:5%;
+    background-color:#4178be;
+    color:white;
+    border-radius:10px 10px 0px 10px;
+}
+.minitext {
+  float:left;
+  font-size:70%;
+  cursor:pointer;
+  margin-top:10px;
+  transition: .3s all;
+}
+.minitext:hover{
+  color:#D867EF;
+  font-size:73%;
+}
+.minitext:active{
+  color:#0EF7C8;
+}
+.bar-margin{
+  margin-top:5px;
+}

@@ -1,0 +1,14 @@
+{
+  "CONVERSATION_API_URL": {"expr": "Conversation.*", "field": "credentials.url", "append": "/v1/workspaces/<ADD-WORKSPACE-ID>/message?version=2016-09-20"},
+  "CONVERSATION_API_USER": {"expr": "Conversation.*", "field": "credentials.username"},
+  "CONVERSATION_API_PASSWORD": {"expr": "Conversation.*", "field": "credentials.password"},
+  "DISCOVERY_URL": {"expr": "Discovery.*", "field": "credentials.url"},
+  "DISCOVERY_USERNAME": {"expr": "Discovery.*", "field": "credentials.username"},
+  "DISCOVERY_PASSWORD": {"expr": "Discovery.*", "field": "credentials.password"},
+  "DISCOVERY_ENV_ID": "<ADD-ENV_ID>",
+  "DISCOVERY_COLLECTION_ID": "<ADD-DISCOVERY_COLLECTION_ID>",
+  "DISCOVERY_CONFIG_ID": "<ADD-DISCOVERY-ID>",
+  "TONE_API_URL":{"expr": "Tone Analyzer.*", "field": "credentials.url"},
+  "TONE_API_USER":{"expr": "Tone Analyzer.*", "field": "credentials.username"},
+  "TONE_API_PASSWORD":{"expr": "Tone Analyzer.*", "field": "credentials.password"}
+}

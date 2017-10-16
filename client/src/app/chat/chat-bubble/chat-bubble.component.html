@@ -1,0 +1,21 @@
+<div *ngIf="message.type==='conversation'" [ngClass]="{ watsontext: message.speaker==='watson', humantext: message.speaker==='human'}" [@flyIn]="message.speaker">
+	<p>{{ message.message }}</p>
+</div>
+<div *ngIf="message.type==='payment'" [ngClass]="{ watsontext: message.speaker==='watson', humantext: message.speaker==='human'}" [@flyIn]="message.speaker">
+	<p>{{ message.message }}</p>
+</div>
+<div *ngIf="message.type==='loading'" [ngClass]="{ watsontext: message.speaker==='watson', humantext: message.speaker==='human'}" [@flyIn]="message.speaker">
+	<i class="fa fa-cog fa-spin fa-2x fa-fw"></i>
+</div>
+<div *ngIf="message.type==='discovery'" [ngClass]="{ watsontext: message.speaker==='watson', humantext: message.speaker==='human'}" [@flyIn]="message.speaker">
+	<p>{{ message.message }}</p>
+	<mat-progress-bar
+		class="bar-margin"
+		color="primary"
+		mode="determinate"
+		[value]="message.score"
+		[matTooltip]="message.score">
+	</mat-progress-bar>
+	<p style="float:right;font-size:60%">CONFIDENCE</p>
+	<p class="minitext" (click)="nextResult()"><i class="fa fa-plus-square" aria-hidden="true" style="margin-right:3px"></i>More results</p>
+</div>

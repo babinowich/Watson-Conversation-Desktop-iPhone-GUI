@@ -1,0 +1,21 @@
+<form autocomplete="off" #f="ngForm">
+  <div class="input-group">
+    <input
+    [(ngModel)]="text"
+    (keypress) = "emitKeyPress($event)"
+    (keydown)="emitTextPresent($event)"
+    type="text"
+    class="form-control"
+    id="chat-input"
+    placeholder="message to Watson"
+    name="textInput"
+    autocomplete="off"
+    >
+    <span class="input-group-btn">
+      <button type="button" class="btn btn-default" aria-label="Left Align" (click)="emitSendMessage()" [disabled]="!text" id="sendButton">
+        <i class="fa fa-arrow-circle-o-up" aria-hidden="true" style="color:#4178be;font-size:140%"></i>
+      </button>
+    </span>
+  </div>
+</form>
+<br>

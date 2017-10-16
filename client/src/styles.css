@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+/*IBM Custom Fonts */
+@font-face {
+    font-family: HelveticaNeueIBMRoman;
+    src: url('assets/fonts/IBMFONTS/HelvNeueRomanforIBM.woff') format('woff'), url('assets/fonts/IBMFONTS/HelvNeueRomanforIBM.ttf') format('ttf'), url('assets/fonts/IBMFONTS/HelvNeueRomanforIBM.otf') format('otf');
+}
+@font-face {
+    font-family: HelveticaNeueIBMLight;
+    src: url('assets/fonts/IBMFONTS/HelvNeueLightforIBM.woff') format('woff'), url('assets/fonts/IBMFONTS/HelvNeueLightforIBM.ttf') format('ttf'), url('assets/fonts/IBMFONTS/HelvNeueLightforIBM.otf') format('otf');
+}
+@font-face {
+    font-family: HelveticaNeueIBMItalic;
+    src: url('assets/fonts/IBMFONTS/HelvNeueMediumItalicforIBM.woff') format('woff'), url('assets/fonts/IBMFONTS/HelvNeueMediumItalicforIBM.ttf') format('ttf')
+}

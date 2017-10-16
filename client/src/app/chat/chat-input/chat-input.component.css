@@ -1,0 +1,28 @@
+#chat-input  {
+  border: 0px;
+  border-radius:0px;
+  border-bottom: 2px solid gray;
+  margin-bottom: 1px;
+  width:160px;
+  padding:0px;
+  font-size:12px;
+}
+
+#chat-input:focus{
+  border-bottom: 3px solid #4178be;
+  margin-bottom: 0px;
+  outline: none;
+}
+
+/deep/ #sendButton{
+  background-color:transparent !important;
+  border:none !important;
+  border-radius:5px !important;
+  padding:0px;
+  margin-left:6px;
+}
+
+/deep/ #sendButton:hover{
+  background-color:#E0E0E0;
+  border:none;
+}
