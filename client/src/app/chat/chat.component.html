@@ -1,9 +1,13 @@
-<div class="row" id="chatHeader">
-  <div class="container">
-    <div class="row">
-      <img src="assets/img/watson_w.png" id="watsonOrb" >
-      <p class="sub-text" style="font-size:85%;color:white;margin-top:8px;margin-bottom:0px">Ask Watson!</p>
-      <i class="fa fa-refresh" id="refreshButton" aria-hidden="true" (click)="refreshConvo()" matTooltip="refresh"></i>
+<div class="row" id="chatHeader" [ngClass]="{ logobar: scrolled==true }">
+  <div class="container" style="margin-left:15px;margin-right:15px">
+    <div class="row" style="margin-top:7px">
+      <div class="col-xs-2" style="padding:0px">
+        <img src="assets/img/watson_w.png" style="height:55px;width:55px;float:left;position:relative;top:-4px;margin-right:8px">
+      </div>
+      <div class="col-xs-10">
+        <h5 class="sub-text" style="margin-bottom:0px;color:white;margin-top:6px">Ask Watson</h5>
+        <p class="sub-text" style="font-size:85%;color:#00B29F;margin-bottom:2px">To deliver the best service</p>
+      </div>
     </div>
   </div>
 </div>

@@ -309,21 +309,21 @@ export class ChatComponent implements OnInit {
     elmnt.scrollIntoView()
   }
 
-  refreshConvo() {
-    console.log('refreshing conversation')
-    this.context = {}
-    this.convoArray = []
-    this.discoveryArray = []
-    this.discoveryIndex = 0
-    this.chatIndex = 0
-    this.pending = false
-    this.utteranceArray = []
-    this.emotionsArray = []
-    this.isAngry = false
-    this.isSad = false
-    this.text = ''
-    this.postMessage('')
-  }
+  // refreshConvo() {
+  //   console.log('refreshing conversation')
+  //   this.context = {}
+  //   this.convoArray = []
+  //   this.discoveryArray = []
+  //   this.discoveryIndex = 0
+  //   this.chatIndex = 0
+  //   this.pending = false
+  //   this.utteranceArray = []
+  //   this.emotionsArray = []
+  //   this.isAngry = false
+  //   this.isSad = false
+  //   this.text = ''
+  //   this.postMessage('')
+  // }
 
   showMore() {
     console.log('wants to see more results')

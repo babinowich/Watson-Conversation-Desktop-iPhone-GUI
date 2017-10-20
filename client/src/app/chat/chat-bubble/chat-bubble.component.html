@@ -14,52 +14,6 @@
 		<i class="fa fa-info-circle" aria-hidden="true" matTooltip="{{ message.emoConfidence | percent: '1.0-2'}} {{ message.emotion }}"></i>
 	</div>
 </div>
-<div *ngIf="message.type==='payment'" [ngClass]="{ watsontext: message.speaker==='watson', humantext: message.speaker==='human'}" [@flyIn]="message.speaker">
-	<p>{{ message.message }}</p>
-	<div class="container">
-	    <div class="row">
-	        <div class="col-md-12">
-	            <div class="credit-card-div">
-	                <div class="panel panel-default">
-	                    <div class="panel-heading">
-
-	                        <div class="row">
-	                            <div class="col-md-12 col-sm-12 col-xs-12">
-	                                <h5 class="text-muted">Bank Info</h5>
-	                            </div>
-	                        </div>
-	                        <div class="row">
-	                            <div class="col-md-12 col-sm-12 col-xs-12">
-	                                <span class="help-block text-muted small-font">Acc number</span>
-	                                <input type="text" class="form-control" placeholder="xxxx" />
-	                            </div>
-	                            <div class="col-md-12 col-sm-12 col-xs-12">
-	                                <span class="help-block text-muted small-font">Routing number</span>
-	                                <input type="text" class="form-control" placeholder="xxxx" />
-	                            </div>
-	                        </div>
-	                        <div class="row ">
-	                            <div class="col-md-12 col-sm-12 col-xs-12 pad-adjust">
-	                                <input type="submit" class="btn btn-danger" value="CANCEL" />
-	                            </div>
-															<div class="col-md-12 col-sm-12 col-xs-12 pad-adjust">
-
-															</div>
-	                            <div class="col-md-12 col-sm-12 col-xs-12 pad-adjust">
-	                                <input type="submit" class="btn btn-warning btn-block" value="PAY NOW" (click)="submit()"/>
-	                            </div>
-	                        </div>
-
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</div>
-</div>
-<div *ngIf="thankyou"  [ngClass]="{ watsontext: message.speaker==='watson', humantext: message.speaker==='human'}" [@flyIn]="message.speaker">
-	<p>Thank you! Anything else I can help you with today?</p>
-</div>
 <div *ngIf="message.type==='loading'" [ngClass]="{ watsontext: message.speaker==='watson', humantext: message.speaker==='human'}" [@flyIn]="message.speaker">
 	<i class="fa fa-cog fa-spin fa-2x fa-fw"></i>
 </div>

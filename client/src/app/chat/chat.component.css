@@ -1,71 +1,47 @@
-#watsonOrb{
-  height:29px;
-  width:29px;
-  float:left;
-  position:relative;
-  top:-4px;
-  margin-right:5px;
-  margin-top:5px;
-  margin-left:5px;
-  margin-bottom:3px;
-}
-
 #input{
+  /*margin-bottom:10vh;*/
   margin-left:4px;
+  width: 100%;
   position: absolute;
-  bottom:2px;
+  bottom:10px;
 }
 
 #input_box{
-  width: 100%;
+  width: 100%
 }
 
 #scrolling-chat-box{
   overflow-x: hidden;
   overflow-y: auto;
-  max-height: 280px;
+  max-height: calc(100vh - 230px);
   padding:0px;
-  padding-top:6px;
+  /*max-height:375px;
+  margin:0px;
+  padding: 10px 15px 10px 15px !important*/
 }
 
 .chatWidget{
+  padding-top:0px !important;
+  margin-top:0px;
+  margin-left:10px;
+  margin-right:10px;
   background-color:white;
-  margin:0px;
-  height:322px;
-  width:204px;
-  padding-left:6px;
-  padding-right:6px;
+  position:relative;
+  height: calc(100vh - 161px);
 }
 
 #chatHeader{
   background-color:#152935;
   color:white;
-  height:36px;
-  width:204px;
-  margin:0px;
+  margin-bottom:15px;
+  border-radius:12px 12px 0px 0px;
 }
 
-.sub-text{
-  font-size:16px;
+#title{
+  margin-left:30px;
+  margin-right:30px;
 }
 
-#refreshButton{
-  font-size:15px;
-  color:white;
-  transition: .3s all;
-  margin-left:60px;
-  cursor:pointer;
-  margin-top:9px;
-}
-
-#refreshButton:hover{
-  font-size:16px;
-  color:#D867EF;
-}
-
-#refreshButton:active{
-  -ms-transform: rotate(50deg);
-  -webkit-transform: rotate(50deg);
-  transform: rotate(50deg);
-  color:#0EF7C8;
+#closeBtn:hover{
+  color:red;
 }
