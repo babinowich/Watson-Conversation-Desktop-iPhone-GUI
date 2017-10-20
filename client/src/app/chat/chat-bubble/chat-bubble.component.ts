@@ -41,10 +41,14 @@ export class ChatBubbleComponent {
   @Input() message: ChatMessage
   @Output() moreResults: EventEmitter<boolean> = new EventEmitter <boolean>()
   canTrigger: boolean = true
+  thankyou: boolean = false
   nextResult() {
     if (this.canTrigger) {
       this.moreResults.emit(true)
       this.canTrigger = false
     }
+  }
+  submit() {
+    this.thankyou = true
   }
 }

@@ -6,7 +6,7 @@ import { Title } from '@angular/platform-browser'
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'Watson Solutions Lab'
+  title = 'Customer View'
 
   public constructor(private titleService: Title) {
     this.titleService.setTitle( this.title )

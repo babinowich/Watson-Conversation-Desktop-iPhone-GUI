@@ -28,7 +28,29 @@ console.log(req.body)
     }
     wdsQueryUtils.query(params).then((result) => {
       // console.log(result)
-      cb(null, result)
+      let response = {}
+      response.passages = []
+      for (let item of result.passages) {
+        if (item.passage_text[0] !== item.passage_text[0].toUpperCase()){
+          item.passage_text = '...' + item.passage_text
+        }
+        if (item.passage_text[0] === ' '){
+          item.passage_text = '...' + item.passage_text
+        }
+        if (item.passage_text[0] === ','){
+          item.passage_text = item.passage_text.slice(2) + '...' + item.passage_text
+        }
+        if (item.passage_text[item.passage_text.length - 2] !== '.'){
+          item.passage_text = item.passage_text + '...'
+        }
+        let obj = {
+          "passage_text": item.passage_text.replace(/<\/?[^>]+(>|$)/g,''),
+          "passage_score": item.passage_score
+        }
+        response.passages.push(obj)
+      }
+      response.count = result.matching_results
+      cb(null, response)
     }, (err) => cb(err))
   }
 
