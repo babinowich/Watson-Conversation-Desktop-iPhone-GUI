@@ -1,6 +1,6 @@
 {
-  "name": "watson-qsr-bot-server",
-  "version": "0.5.0",
+  "name": "watson-conversation-iphone-desktop",
+  "version": "1.0.0",
   "main": "server/server.js",
   "engines": {
     "node": "^7.8.0",
