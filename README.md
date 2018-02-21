@@ -20,9 +20,9 @@ This Accelerator requires the following:
 # Description
 This Watson Accelerator framework combines Watson Conversation, Watson Discovery, and Watson Tone Analyzer to allow for the creation an empathetic chatbot in the pixel dimensions of an iPhone 6+ to simulate what such a chatbot could look like on a mobile interface.
 
-The Accelerator comes with a predefined sample set of Customers and Orders Data that are used within the application to represent the use case.  The app retrieves customer data from a Cloudant database that can be modified to represent a unique story or can use the provided predefined sample. Find this in `data/sampleCust.json`.
+There is no provided Discovery documents nor Conversation workspace export.
 
-The Accelerator also has a prebuilt Conversation Workspace that can be used to jump-start this retail use case of order status inquiry. Find this in `data/WISMOworkspace.json`.
+Additionally, you must provision your own Watson instances on IBM Cloud.  Click [here](https://console.bluemix.net/catalog/).  to sign up for a free trial of IBM Cloud if you do not already have an account.
 
 # Prerequisites
 
