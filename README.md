@@ -3,6 +3,9 @@
 ## Overview
 A web-interface for short-tail & long-tail chatbot with tone 
 
+![](./img/image.png)
+
+
 To see a native iOS version of this application, check out this repo here:
 >Coming soon!
 
