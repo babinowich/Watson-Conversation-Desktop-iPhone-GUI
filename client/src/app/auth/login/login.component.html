@@ -1,0 +1,48 @@
+<div class="login-wrapper">
+  <form class="login" #loginForm="ngForm" (ngSubmit)="submitLogin()">
+      <section class="title">
+        <div class="row">
+            <div class="col-sm-3">
+              <img id="avatar" src="assets/watson/watson-avatar-web_only-blueteal.svg">
+            </div>
+          <div class="col-sm-9">
+              <h3 class="welcome">Powered by IBM Watson</h3>
+              VMware GSS Case Routing Assistant
+              <!-- <h5 class="hint">Use your Company ID to sign in or create one now</h5> -->
+          </div>
+        </div>
+      </section>
+      <div class="login-group">
+          <input 
+            [(ngModel)]="credentials.username" 
+            #username="ngModel" 
+            class="username form-control"
+            id="username" 
+            name="username"
+            placeholder="Username"  
+            type="text" 
+            autofocus 
+            required>
+          <input 
+            [(ngModel)]="credentials.password" 
+            #password="ngModel" 
+            class="password form-control"
+            id="password"
+            placeholder="Password"
+            name="password"
+            type="password"
+            required>
+          <div class="checkbox">
+              <input type="checkbox" id="rememberme">
+              <label for="rememberme">
+                  Remember me
+              </label>
+          </div>
+          <div *ngIf="isError" class="error active">
+              {{errorMsg}}
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Login</button>
+          <!-- <a href="javascript://" class="signup">Sign up for a Company ID</a> -->
+      </div>
+  </form>
+</div>

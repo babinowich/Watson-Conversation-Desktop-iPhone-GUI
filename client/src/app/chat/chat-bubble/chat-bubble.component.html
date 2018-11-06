@@ -77,5 +77,5 @@
 </div>
 <div *ngIf="message.type==='showGif'" [ngClass]="{ watsontext: message.speaker==='watson', humantext: message.speaker==='human'}" [@flyIn]="message.speaker">
 	<p>{{ message.message }}</p>
-	<img src="assets/cat_giphy.gif" style="max-width:125px;max-height:200px">
+	<img src="assets/cat_giphy.gif" style="max-width:125px;max-height:200px;margin-top:5px;">
 </div>

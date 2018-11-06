@@ -1,13 +1,12 @@
 # Watson Conversation Desktop iPhone GUI
 
 ## Overview
-A web-interface for short-tail & long-tail chatbot with tone 
 
-![](./img/image.png)
+This Watson Accelerator framework combines Watson Conversation, Watson Discovery, and Watson Tone Analyzer to allow for the creation an empathetic chatbot in the pixel dimensions of an iPhone 6+ to simulate what such a chatbot could look like on a mobile interface.
 
+![](./images/app.png)
 
-To see a native iOS version of this application, check out this repo here:
->Coming soon!
+To see a native iOS version of this application, check out this repo here <COMING SOON>
 
 # Required Services
 
@@ -18,273 +17,187 @@ This Accelerator requires the following:
 - Watson Tone Analyzer
 
 # Description
-This Watson Accelerator framework combines Watson Conversation, Watson Discovery, and Watson Tone Analyzer to allow for the creation an empathetic chatbot in the pixel dimensions of an iPhone 6+ to simulate what such a chatbot could look like on a mobile interface.
 
-There is no provided Discovery documents nor Conversation workspace export.
-
-Additionally, you must provision your own Watson instances on IBM Cloud.  Click [here](https://console.bluemix.net/catalog/).  to sign up for a free trial of IBM Cloud if you do not already have an account.
-
-# Prerequisites
-
-## Local Deployment
-To make changes, you'll probably want to deploy locally to compile updates as you code.
-
-### Node and NPM
-Install 'node.js' -- This application requires at least version 7.9.x.  To get current LTS, you can get the download from [here](https://nodejs.org/en/download/current/).  This will give you `npm` and `node`.
-
-### Loopback CLI (optional)
-Install 'loopback-cli' globally so you can use the 'lb' commands for models/etc:
-```
-npm install -g loopback-cli
-```
-
-## IBM Cloud Deployment
-To make changes, you'll probably want to deploy locally to compile updates as you code.
-
-### Bluemix CLI
-Follow the instructions on the [IBM Bluemix Cloud CLI page](https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html) to download and install the Bluemix CLI.
-
-
-### Cloudfoundry CLI 
-To deploy the application and manage services from the command line using cloud foundry, you would need this CLI.  You can use the 
-
-Follow the instructions on the [Cloudfoundry CLI page](https://github.com/cloudfoundry/cli#downloads) to download and install the CF CLI.
-
-```
-cf api https://api.ng.bluemix.net
-
-cf login -u yourEmail@email.com -o yourIBMcloudOrg -s yourTargetedSpace
-
-cf push app-name
-
-```
-
-# Setup Instructions
 The high-level steps to get this application running is as follows;
 
-1. Provision required Watson Services.
-2. Create a trained Conversation workspace.
-3. Upload documents to a Discovery collection and train query results if necessary.
-4. Hookup Watson services to the application server.
+1. Create a trained Conversation workspace.
+2. Upload documents to a Discovery collection and train query results if necessary.
+3. Hookup required Watson services to the application server.
 
-## Provision Watson Services & Create Node.js 
-Once the dependencies are installed, create your Bluemix services for this accelerator. Accelerators do NOT come with Watson services for you to bind to.  You must create and provision your own that you bind.
+## Prerequisites
 
-Services needed:
-- Watson Conversation
-- Watson Discovery Service
-- Watson Tone Analyzer
+The application requires the following software to be installed locally.
 
-On your IBM Cloud Dashboard, click the Blue Create Resource Button and scroll to Watson, creating one instance of each service above. If you have a service already provisioned, you can Bind to that same instance.
+1. Node (7.8+) Application runtime environment
+2. NPM (5.5+) Server side dependency management
+3. Angular CLI (1.0.0) `npm install -g @angular/cli`
 
-You'll also need to create a Cloud Foundry Application.  Select SDK for Node.js under Platform, Cloud Foundry Apps in the Create Resource menu.
+> If you have Angular CLI already installed.  Please read the upgrade instructions for Angular CLI when you upgrade the software.
 
-Give the Application a name.  Take note of the name! You'll need this for the last step.
+# Setup Instructions
 
-The host you choose will determinate the subdomain of your application's URL:  `<host>.mybluemix.net`
+The setup is done in 3 primary steps.  You will download the code, setup the application, and then deploy the code to Bluemix.  If you would like to run the code locally, there will be one more step to configure the credentials locally.
 
-## Watson Conversation Configuration
-Create your Watson Conversation instance on IBM Cloud then design and build your Intents, Entities, and Dialog Flows per your use case.
+## Downloading the code
 
-Check out this [link](https://console.bluemix.net/docs/services/conversation/getting-started.html) for a helpful tutorial on getting started with Watson Conversation.
+1. Clone the app to your local environment from your terminal using the following command:
 
-You can add Intents, Entities, and Dialog Flows to your workspace as you'd like.  Remember, free instances only allow for 15 Intents per workspace.
+  ```
+  git clone https://github.ibm.com/Watson-Solutions-Lab/decision-support.git
+  ```
+2. `cd` into this newly created directory
 
-### Configuring Your Workspace to Accept Watson Tone Analyzer Context
-The model created for Watson Tone Analyzer in /common/models/tone.js outputs the following object:
+## Setting up Bluemix
+
+> Explanation: You will create a placeholder application in Bluemix that connects to all the required services first.
+
+1. If you do not already have a Bluemix account, [sign up here](https://console.ng.bluemix.net/registration).
+2. Download and install the [Cloud Foundry CLI](https://console.ng.bluemix.net/docs/cli/index.html#cli) tool.
+3. Log into Bluemix with our account.
+4. From the Application Dashboard, Create a new Application.
+  - On the left, select Apps > Cloudfoundry Apps.
+  - On the right, select SDK for Node.js.
+  - Provide a unique name for your application.
+5. Once the application is created, go into the application and select Connections.
+6. Create the required services and bind them to the newly created application.
+7. Leave the Connections page open, as you will reference the credentials in the subsequent setup step.
+
+Watson Tone Analyzer does not require any configuration.  For help on configuring and training Conversation, and Discovery, see below.
+
+### Configuring & Training Watson Conversation
+
+There is no pre-trained Conversation workspace for this prototype.
+
+Create a custom dialog flow in the [Watson conversation tooling](https://ibmwatsonconversation.com) as you would normally, using intents and entities to route your dialog flow.
+
+A conversation flow for this prototype should include a node for long tail responses to be answered by a segment of text in a Watson Discovery Service (WDS) collection.  This node can either be triggered by a "true" condition node on the bottom of your dialog flow logic, or by training a specific #LONG_TAIL intent for the conversation dialog to hit when a question is asked that you would like to be handled by WDS.
+
+The prototype application logic fires off the input text when the conversation output has the attribute "call_discovery" == true
+
+Therefore, in your long-tail node, edit the output object in the Conversation tooling to include "call_discovery" : true
+
+
+### Configuring & Training Watson Discovery Service
+
+Upload and train your Discovery collection as needed.
+
+### Note About Tone Analyzer
+
+The way the prototype is currently set up, the Tone Analyzer part of the application interprets user input text and if it is impolite with a 60% confidence or frustrated with a 68% confidence, the system does not send the text to Conversation, but interjects and says a message prompted from the application layer.
+
+At this point, you can do many different things to fix a bad conversation such as- offer a coupon, show a map of the nearest location, show a telephone number to call, or even have an orchestration to another service like ServiceNow, IBM Voice Gateway, or some other warm handoff system.
+
+The confidence levels can be changed as you see fit.  I selected those levels from simple testing of impolite and frustrated phrases.
+
+![](./images/angry.png)
+
+Similarly, if the user's text is interpreted as 70% sadness, a silly cat giphy will appear.  Again this can be customized as you'd like.
+
+![](./images/sad.png)
+
+
+## Setting up Local Configuration files
+
+There are 2 sample configuration files that are required by the application.
+
+The `env-vars-example.json` file should be copied to `env-vars.json` before the application is executed on Bluemix or locally.
+
+The `vcap-local-example.json` file should be copied to `vcap-local.json` before the application is executed locally.  This file contains your service credentials required to run the application locally.  If the app is run on Bluemix, the app will use the VCAP service information on Bluemix.  The sample file is a skeleton of what is required, but, you have to fill in the details.
+
+> The `env-vars.json` file is where all the parameters of this application is kept.  The setup utility, explained later, will guide you through setting up the parameters in this file, but you can come back and modify them at any time.
+
+## Installing the dependencies
+
+The server dependencies are controlled and defined in [the main package.json](./package.json).
+
+The client dependencies are controlled and defined in [the client package.json](./client/package.json).
+
+Run the following command, from the application folder, to install both the client and server dependencies.
 
 ```
-{ lastPredom: 'frustrated',
-  lastPredomConf: 0.6875,
-  lastUtterance:
-   { utterance_id: 1,
-     utterance_text: 'f*** you',
-     tones: [ [Object] ] },
-  columnData:
-   [ [ 'sad', 0, 0 ],
-     [ 'frustrated', 0, 0.6875 ],
-     [ 'excited', 0, 0 ],
-     [ 'satisfied', 0, 0 ],
-     [ 'impolite', 0, 0 ],
-     [ 'sympathetic', 0, 0 ],
-     [ 'polite', 1, 0 ] ],
-  allAnalysis:
-   [ { utterance_id: 0, utterance_text: 'hi', tones: [Array] },
-     { utterance_id: 1, utterance_text: 'f*** you', tones: [Array] } ] }
+npm install
 ```
 
-This Tone Object is formatted to show the Last Predominant Emotion in `lastPredom` along with the confidence in `lastPredomConf`.  If you are planning to show the data in a timeseries fashion (i.e. chart) you can use the `columnData` attribute.  The raw output from the Tone Analyzer service is appended in an array under `allAnalysis`.
+## Running the app on Bluemix
 
-The pre-built Conversation service on the client side in /client/src/app/chat/conversation.service.ts appends this Tone Object to the context object for Watson Conversation.  This then allows you to handle the Tone in your Conversation dialog flow with conditional triggers.  For example, at the top of a Dialog Flow set a condition to "if lastPredom == 'frustrated' && 'lastPredomConf > 0.7" then say "Hey looks like this conversation isn't going too well!".
+Use the name of the application you created previously to update the configuration files locally.
 
-For example, take a look at the following two conversations with the same intent, but phrased differently:
+1. Open the `manifest.yml` file and change the `name` AND `host` value to the unique application name you created on Bluemix previously.
 
-![](./data/polite.png)
+2. Compile the Angular client code using the following command.
 
-![](./data/sad.png)
+  ```
+  $ npm run build:client
+  ```
+3. Connect to Bluemix in the command line tool and follow the prompts to log in
 
-You can see the /client/src/app/chat/chat-bubble has conditional logic looking for bad tones, and changes the color of the bubble to red.
+  ```
+  $ cf login -a https://api.ng.bluemix.net
+  ```
+4. Push the app to Bluemix.
 
-Another option for integrating Tone Analyzer with Conversation is to infuse your client side components with similar logic, bypassing Conversation altogether and thereby allowing a call to an external API such as one that hooks up to a live agent. This framework has some of that logic mocked up here in the /client/src/app/chat/chat.component.ts component, on line 133.  You can see we look for a specific threshold of Frustration and intercept our sending to Conversation with a response that says "Im sorry it looks like this conversation isnt going too well."  You can remove this and shift that logic into your dialog flow, or keep the logic on your app as this has here.
+  ```
+  $ cf push
+  ```
+5. The application should now be running on Bluemix and listening to Tweets.  You can access the application URL using the application name you defined in the manifest.yml file with a '.mybluemix.net' appended to it.
 
+6. The application is secured with a username and password. See the end of this README for details.
 
-## Watson Discovery Service Configuration
-Create your Watson Discovery Instance on IBM Cloud then design your configuration and select enrichments as needed for your use case.  
+## Running the app locally
 
-For tips and procedures on uploading documents to Discovery and features of the tooling, take a look at this [link](https://console.bluemix.net/docs/services/discovery/getting-started-tool.html) here.
+To run the application locally (your own computer), you have to install additional Node.js modules and configure the application with some credentials that is provisioned on Bluemix.
 
-For help with the API itself, check out this [link](https://console.bluemix.net/docs/services/discovery/getting-started.html).
+### Starting the application
 
-You may find that you'll want to perform Relevancy Training to improve the results of your Natural Lanaguage Query.
+There are a few quick steps required to stand up the application. In general, the required tasks are.
 
-### Configuring Your Workspace to Call to Discovery When Needed
-Just like integrating Tone Analyzer above, there are multiple ways to call out to Discovery for a long-tail (infrequent or unscripted) question.
+1. Install the server and client dependencies
+2. Commission the required services
+3. Configure the environment variables in manifest.yml (cloud deployment) or .env (local deployment)
+4. Build and run or deploy
 
-You can add a catchall intent in your Dialog Flow logic in Watson Conversation such as #LONG_TAIL trained with a few examples of long tail utterances and have an output Object in the response from Conversation flag the call.  For instance `output.call_discovery` == true.  This framework follows this paradigm as you can see on /client/src/app/chat/chat.component.ts line 199.
-
-For more information on this method of calling Discovery for a long-tail question, check out this [blog](https://developer.ibm.com/recipes/tutorials/customized-watson-conversation-output/).
-
-Another method is using Dialog Actions inside the Dialog Flow itself as shown [here](https://console.bluemix.net/docs/services/conversation/dialog-actions.html#dialog-actions).
-
-## Hook Up Watson Services
-For each service, open the instance up in IBM Cloud Dashboard and click on your newly created Node.js application.
-
-1. Click on the Connect existing button.
-2. Search for the service you would like to bind to.
-3. Bind it to your application.
-4. Re-stage the application.
-
-### The Local VCAP file
+## The Local VCAP file
 
 The vcap-local.json file consist of your Bluemix service credentials when you run the application locally.
 
 This file must be updated with your service credentials before the application can be executed.
 
 1. On the Bluemix Application page, select the Connections option on the left.
-2. Click the three dots menu on the right side of each Service bound to your application. Click View Crednentials If you don't see the services, you didn't bind right.  Take a look again at the Hook Up Watson Services section to make sure you did this.
+2. Select each of the services you provisioned earlier and view the credentials.
 3. Copy the credentials using the 'copy' icon.
 4. Edit the vcap-local.json file.
 5. Paste the content of the clipboard into the vcap.local file.
-6. The structure of this file consists of a service name and a json object, but the pasted value is wrapped in another ```{ }``` that should be removed.
+6. The structure of this file consist of a service name and a json object, but the pasted value is wrapped in another ```{ }``` that should be removed.
 7. A sample of what it should look like below;
 
 ```
-{
-  "discovery": [
-    {
-      "credentials": {
-        ...
-      },
-      "syslog_drain_url": null,
-      "label": "discovery",
-      "provider": null,
-      "plan": "Lite",
-      "name": "Discovery Lite em1",
-      "tags": [
-        "data_management",
-        "ibm_created",
-        "ibm_dedicated_public"
-      ]
-    }
-  ],
-  "conversation": [
-    {
-      ...
-    }
-  ]
-}
+"conversation": [
+  {
+    "credentials": {
+      "url": "https://gateway.watsonplatform.net/conversation/api",
+      "username": "USERNAME",
+      "password": "PASSWORD"
+    },
+    "syslog_drain_url": null,
+    "volume_mounts": [],
+    "label": "conversation",
+    "provider": null,
+    "plan": "free",
+    "name": "Conversation-31",
+    "tags": [
+      "watson",
+      "ibm_created",
+      "ibm_dedicated_public",
+      "lite"
+    ]
+  }
+]
 ```
 
-Great! All connected and ready to go.
+8. Once all the credentials are in place, the application can be starter with `npm run develop`.
 
-# Test and Develop Locally
+## Accessing the Application
 
-To run the application locally (your own computer), you have to install additional Node.js modules and configure the application with some credentials that is provisioned on Bluemix.
-There are a few quick steps required to stand up the application. In general, the required tasks are.
+There is only 1 user required for this application.  This user is `watson` with a password of `p@ssw0rd`
 
-1. Install the server and client dependencies
-2. Commission the required services (should be all done if you followed the above section)
-3. Configure the environment variables in manifest.yml (cloud deployment) or .env (local deployment)
-4. Build and run or deploy
-
-## Installing the server and client dependencies
-The server dependencies are controlled and defined in [the main package.json](./package.json).
-
-The client dependencies are controlled and defined in [the client package.json](./client/package.json).
-
-To install all required dependencies to both build the application and execute the application, execute the following script from the project root.
-
-```
-npm install
-```
-
-## Commission the required services (done in step 2)
-You already did this! Congrats!
-
-## Configure the environment variables
-Open the `manifest.yml` file and change the `name` and `host` values to your application name. This is IMPORTANT as it must have a unique name for your own application.  WISMO is a taken name.
-
-The host you choose will determinate the subdomain of your application's URL:  `<host>.mybluemix.net`
-
-For your environment variables, make sure you configure your env-vars.json file to pull credentials from your vcap-local.json that you created in the earlier step.  Use the example-env-vars.json as a template.  The file uses regular expressions to pull the credentials from the vcap-local.json file, that way we're not writing them in two spaces for local and Bluemix use!
-
-## Build Run & Deploy Locally
-
-### Development Mode:
-
-Once all the credentials are in place, the application can be started with
-```
-npm run develop
-```
-
-This mode will build and serve the complete application and will rebuild and restart when it detects changes to the source. Issue the following command to start the application in development mode. Additionally, the browser will automatically refresh on changes.
-
-Follow the prompts in Terminal/Command Line to access your local host.  This server starts on port 3000.
-
-### Standard Mode:
-
-This mode will build and serve the complete application but it will not rebuild and restart when it detects changes to the source. Issue the following command to start the application in standard mode:
-
-```
-npm run serve
-```
-
-Follow the prompts in Terminal/Command Line to access your local host.  This server starts on port 3000.
-
-### Accessing the Application
-
-When you run the application locally or on Bluemix, you will be prompted for a username and password when you load the application in a browser.
-
-- Log into the application using the credentials username = ```watson``` and password = ```p@ssw0rd```.
-
-- You can modify this my editing the file settings/user_registry to add, modify or remove credentials.
-
-- At least 1 set of credentials is required
-
-
-## Deploy to IBM Cloud
-Open the `manifest.yml` file and make you you have changed the `name` and `host` values to your application name. This is IMPORTANT as it must have a unique name for your own application.
-
-
-2. Connect to Bluemix in the command line tool and follow the prompts to log in
-
-  ```
-  $ cf login -a https://api.ng.bluemix.net
-  ```
-3. Push the app to Bluemix, but don't start it yet.  We would need to bind the services to the new application before starting it up.
-
-  ```
-  $ cf push
-  ```
-
-4. The application should now be running on Bluemix.  You can access the application URL using the application name you defined in the manifest.yml file with a '.mybluemix.net' appended to it.
-
-7. The application is secured with a username and password.
-
-8. Continue to the next step to do some additional configuration within the application.
-
-# Contributing
-
-Please do contribute! Fork, add an issue, and I'd be happy to take a look at it.
-
-Remember that the main purpose of this application is for rapid prototyping and not for scalable production instances.  Components may be used for such uses, but the entire application as is does not have production-ready code in it.  The focus here is on readibility, reusability, and for a demonstration of what can be done with these Watson services.
+The user names and passwords can be modified in the /server/boot/init-access.js file.

@@ -1,4 +1,4 @@
-#background{
+/* #background{
   position: absolute;
   background-size: cover;
   background-image: url("../../assets/img/background.gif");
@@ -6,7 +6,7 @@
   height: 100%;
   color:white;
   margin:0px;
-}
+} */
 
 #iphone{
   max-height:522px;
@@ -16,9 +16,20 @@
 #iphoneScreen{
   height:362px;
   width:208px;
-  position:absolute;
+  /* position:absolute;
   top:110px;
-  left:35px;
+  left:35px; */
   border: 2px solid black;
   border-radius: 5px;
+}
+
+#screen {
+  background-color: white;
+    height: 650px;
+    border-radius: 33px;
+    position: absolute;
+    top: 80px;
+    width: 302px;
+    margin-left: 63px;
+    z-index: 10;
 }

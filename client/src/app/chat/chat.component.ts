@@ -1,15 +1,15 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core'
 
-import { WatsonConversation } from './conversation.service'
-import { WatsonDiscovery } from './discovery.service'
-import { WatsonToneAnalyzer } from './tone-analyzer.service'
+import { WatsonAssistant } from './shared/services/assistant.service'
+import { WatsonDiscovery } from './shared/services/discovery.service'
+import { WatsonToneAnalyzer } from './shared/services/tone.service'
 
-import { ChatMessage } from './classes/message'
-import { Emotion } from './classes/emotion'
-import { Utterance } from './classes/utterance'
+import { ChatMessage } from './shared/classes/message'
+import { Emotion } from './shared/classes/emotion'
+import { Utterance } from './shared/classes/utterance'
 
 @Component({
-  selector: 'wsl-chat',
+  selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
@@ -36,9 +36,9 @@ export class ChatComponent implements OnInit {
   isSad: boolean = false
 
   constructor(
-    private convoService: WatsonConversation,
-    private discoveryService: WatsonDiscovery,
-    private toneService: WatsonToneAnalyzer
+    private assistant: WatsonAssistant,
+    private discovery: WatsonDiscovery,
+    private tone: WatsonToneAnalyzer
   ) { }
 
 // 1- when the app starts, initialize by sending a blank text submission to Watson
@@ -114,7 +114,7 @@ export class ChatComponent implements OnInit {
   }
 
   postEmotionMessage(text: string) {
-    this.toneService.getAnalysis(this.utteranceArray).subscribe(response => {
+    this.tone.getAnalysis(this.utteranceArray).subscribe(response => {
     // this helps account for the weird tone bug that comes up sometimes (sometimes 500's, will bring back false)
       if (response.status === '500') {
         console.log('Tone 500-ed')
@@ -123,11 +123,13 @@ export class ChatComponent implements OnInit {
       } else {
         // if tone worked, then continue
         const emotions = response
+        console.log(emotions)
+        console.log(this.convoArray)
         // append the new emotions analyzed to the context object for next message
         this.context.emotions = emotions
         this.emotionsArray = response
         // find the item in the conversation array that we just got the tone for, and update the tone attributes for that item
-        this.convoArray[this.convoArray.length - 2].emotion = response.lastPredom
+        this.convoArray[this.convoArray.length - 2].emotion = emotions.lastPredom
         this.convoArray[this.convoArray.length - 2].emoConfidence = response.lastPredomConf
         // developer chosen thresholds for emotions - can change depending on use case
         if (emotions.lastPredom === 'frustrated' && emotions.lastPredomConf > 0.68) {
@@ -193,10 +195,11 @@ export class ChatComponent implements OnInit {
   }
 
   postMessage(text: string) {
-    this.convoService.sendMessage(text, this.context).subscribe(response => {
+    this.assistant.sendMessage(text, this.context).subscribe(response => {
+      console.log(response)
       this.convoArray.pop()
       // if the conversation service has a discovery flag, let's call discovery
-      if (response[0].output.call_discovery === true) {
+      if (response.output.call_discovery === true) {
         console.log('call discovery')
       // add a line indicating we are going to discovery for probabilistic answer
         this.convoArray.push(
@@ -224,21 +227,21 @@ export class ChatComponent implements OnInit {
             'loading'
           )
         )
-        const convoResponse = response[0].output.text[1]
-        this.discoveryService.query(text).subscribe(data => {
+        const convoResponse = response.output.text[1]
+        this.discovery.query(text).subscribe(data => {
           console.log(data)
           this.convoArray.pop()
-          this.discoveryArray = data.passages
+          this.discoveryArray = data.results
           this.resultCount = data.matching_results
           this.convoArray.push(
             new ChatMessage(
-              this.discoveryArray[this.discoveryIndex].passage_text,
+              this.discoveryArray[this.discoveryIndex].text,
               'watson',
               this.chatIndex++,
               null,
               null,
               null,
-              this.discoveryArray[this.discoveryIndex].passage_score * 10,
+              this.discoveryArray[this.discoveryIndex].score * 10,
               'discovery'
             )
           )
@@ -259,7 +262,7 @@ export class ChatComponent implements OnInit {
             this.discoveryIndex ++
           }, 400)
         })
-      } else if (response[0].output.credit_card_widget === true) {
+      } else if (response.output.credit_card_widget === true) {
         console.log('show credit card widget')
         this.convoArray.push(
           new ChatMessage(
@@ -274,8 +277,8 @@ export class ChatComponent implements OnInit {
           )
         )
       } else {
-        console.log(response[0])
-        response[0].output.text.forEach((line) => {
+        console.log(response)
+        response.output.text.forEach((line) => {
           this.convoArray.push(
             new ChatMessage(
               line,
@@ -290,7 +293,7 @@ export class ChatComponent implements OnInit {
           )
         })
       }
-      this.context = response[0].context
+      this.context = response.context
       // this.convoResponse.emit(response)
       setTimeout(() => {
         this.scrollToBottomOfChat()

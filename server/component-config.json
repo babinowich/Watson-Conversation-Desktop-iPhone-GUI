@@ -1,5 +1,8 @@
 {
   "loopback-component-explorer": {
     "mountPath": "/explorer"
-  }
+  },
+  "./components/watson-assistant-component/watson-assistant-loader": {},
+  "./components/watson-tone-component/watson-tone-loader": {},
+  "./components/watson-discovery-component/watson-discovery-loader": {}
 }

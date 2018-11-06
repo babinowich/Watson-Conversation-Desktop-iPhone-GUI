@@ -1,0 +1,30 @@
+.container-fluid {
+    width: 100vw;
+    height: 100vh;
+    background-color: #f9f9f9;
+  }
+  
+  .card {
+    border: solid 1px #cccccc;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.30);
+  }
+  
+  input.btn {
+    cursor: pointer;
+    border-radius: 0px;
+  }
+  
+  .ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #42A948; /* green */
+  }
+  
+  .ng-invalid:not(form)  {
+    border-left: 5px solid #a94442; /* red */
+  }
+  
+  #avatar{
+    max-height:200px;
+    position:relative;
+    right:72px;
+    bottom:15px;
+  }

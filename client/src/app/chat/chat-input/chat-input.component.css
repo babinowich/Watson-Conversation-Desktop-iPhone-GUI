@@ -1,17 +1,20 @@
 #chat-input  {
   border: 0px;
   border-radius:0px;
-  border-bottom: 2px solid gray;
-  margin-bottom: 1px;
-  width:160px;
+  border-bottom: 3px solid gray;
+  /* margin-bottom: 1px; */
+  width:270px;
   padding:0px;
-  font-size:12px;
+  font-size:16px;
 }
 
 #chat-input:focus{
+  border-color:transparent;
   border-bottom: 3px solid #4178be;
   margin-bottom: 0px;
   outline: none;
+  outline-style:none;
+  box-shadow:none;
 }
 
 /deep/ #sendButton{

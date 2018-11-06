@@ -1,17 +1,18 @@
 <div class="row" id="chatHeader">
   <div class="container">
-    <div class="row">
-      <img src="assets/img/watson_w.png" id="watsonOrb" >
-      <p class="sub-text" style="font-size:85%;color:white;margin-top:8px;margin-bottom:0px">Ask Watson!</p>
+    <img src="assets/img/test.png" id="iphone-notch" >
+    <div class="row" style="position:relative;bottom:30px">
+      <img src="assets/img/watson-blue.svg" id="watsonOrb" >
+      <h3 style="margin-top:25px">Ask Watson!</h3>
       <i class="fa fa-refresh" id="refreshButton" aria-hidden="true" (click)="refreshConvo()" matTooltip="refresh"></i>
     </div>
   </div>
 </div>
 <div class="row chatWidget">
   <div class="container" id="scrolling-chat-box">
-    <wsl-chat-bubble *ngFor='let message of convoArray' [message]="message" (moreResults)="showMore($event)"></wsl-chat-bubble>
+    <app-chat-bubble *ngFor='let message of convoArray' [message]="message" (moreResults)="showMore($event)"></app-chat-bubble>
   </div>
   <div class="row" id="input">
-    <wsl-chat-input (sendMessage)="submitPressed($event)" (textPresent)="postPending($event)" id="input_box"></wsl-chat-input>
+    <app-chat-input (sendMessage)="submitPressed($event)" (textPresent)="postPending($event)" id="input_box"></app-chat-input>
   </div>
 </div>

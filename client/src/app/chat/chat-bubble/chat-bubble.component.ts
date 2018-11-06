@@ -1,19 +1,10 @@
-import {
-  EventEmitter,
-  Output,
-  Component,
-  Input,
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-  keyframes } from '@angular/core'
+import { EventEmitter, Output, Component, Input } from '@angular/core'
+import { trigger, state, style, animate, transition, keyframes } from '@angular/animations'
 
-import { ChatMessage } from '../classes/message'
+import { ChatMessage } from '../shared/classes/message'
 
 @Component({
-  selector: 'wsl-chat-bubble',
+  selector: 'app-chat-bubble',
   templateUrl: './chat-bubble.component.html',
   styleUrls: ['./chat-bubble.component.css'],
   animations: [

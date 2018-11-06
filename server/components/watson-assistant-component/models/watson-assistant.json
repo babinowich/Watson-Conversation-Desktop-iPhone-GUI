@@ -1,0 +1,44 @@
+{
+    "name": "WatsonAssistant",
+    "plural": "WatsonAssistant",
+    "base": "Model",
+    "idInjection": true,
+    "options": {
+      "validateUpsert": true
+    },
+    "properties": {},
+    "validations": [],
+    "relations": {},
+    "acls": [
+      {
+        "principalType": "ROLE",
+        "principalId": "$everyone",
+        "permission": "DENY",
+        "property": "*"
+      },
+      {
+        "principalType": "ROLE",
+        "principalId": "$authenticated",
+        "permission": "ALLOW",
+        "property": "*"
+      }
+    ],
+    "methods": {
+      "message": {
+        "accepts": [
+          {
+            "arg": "body",
+            "type": "object",
+            "http": {
+              "source": "body"
+            }
+          }
+        ],
+        "returns": {
+          "arg": "body",
+          "type": "object",
+          "root": true
+        }
+      }
+    }
+  }

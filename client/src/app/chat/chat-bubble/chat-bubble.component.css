@@ -3,12 +3,12 @@
     line-height: 100%;
     display: block;
     position: relative;
-    padding:8px 9px 8px 9px;
+    padding: 10px 12px;
     margin-bottom: 0.7em;
     clear: both;
     max-width:75%;
     line-height: 120%;
-    font-size:12px;
+    font-size:16px;
     font-family: "Helvetica Neue",Helvetica,"Open Sans",Arial,"Lucida Grande",Roboto,sans-serif;
     font-weight: normal;
 }

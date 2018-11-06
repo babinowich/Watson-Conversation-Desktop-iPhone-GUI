@@ -1,16 +1,17 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import { ReactiveFormsModule } from '@angular/forms'
-import { HttpModule } from '@angular/http'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { HttpClientModule } from '@angular/common/http'
 
-import { LoopbackLoginComponent } from './loopback/lb-login.component'
-import { LoopbackLoginService } from './loopback/lb-login.service'
+import { LoginComponent } from './login/login.component'
+import { LoopbackAuthService } from './loopback/loopback-auth.service'
+import { AuthGuard } from './auth.guard'
 
 @NgModule({
-  imports:      [ CommonModule, HttpModule, ReactiveFormsModule ],
-  declarations: [ LoopbackLoginComponent ],
-  providers:    [ LoopbackLoginService ],
-  exports:      [ LoopbackLoginComponent ]
+  imports:      [ CommonModule, HttpClientModule, FormsModule, ReactiveFormsModule ],
+  declarations: [ LoginComponent ],
+  providers:    [ LoopbackAuthService, AuthGuard ],
+  exports:      [ LoginComponent ]
 })
 
-export class AuthModule {}
+export class AuthModule { }

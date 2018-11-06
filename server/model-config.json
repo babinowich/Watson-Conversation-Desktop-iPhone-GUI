@@ -13,6 +13,23 @@
       "./mixins"
     ]
   },
+  "ApiUser": {
+    "dataSource": "db",
+    "public": true,
+    "options": {
+      "remoting": {
+        "sharedMethods": {
+          "*": false,
+          "login": true,
+          "logout": true,
+          "isInRole": true,
+          "prototype.__destroyById__accessTokens": true,
+          "prototype.__findById__accessTokens": true,
+          "prototype.__get__accessTokens": true
+        }
+      }
+    }
+  },
   "User": {
     "dataSource": "db",
     "public": false
@@ -27,36 +44,13 @@
   },
   "RoleMapping": {
     "dataSource": "db",
-    "public": false
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
   },
   "Role": {
     "dataSource": "db",
     "public": false
-  },
-  "Auth": {
-    "dataSource": "db",
-    "public": true,
-    "options": {
-      "remoting": {
-        "sharedMethods": {
-          "*": false,
-          "login": true,
-          "logout": true,
-          "isInRole": true
-        }
-      }
-    }
-  },
-  "ToneAnalyzer": {
-    "dataSource": "tone-analyzer",
-    "public": true
-  },
-  "Conversation": {
-    "dataSource": "watson-conversation",
-    "public": true
-  },
-  "discovery": {
-    "dataSource": null,
-    "public": true
   }
 }

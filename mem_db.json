@@ -1,28 +1,31 @@
 {
   "ids": {
     "User": 1,
-    "AccessToken": 222,
+    "ApiUser": 4,
+    "AccessToken": 87,
     "ACL": 1,
     "RoleMapping": 2,
-    "Role": 2,
-    "Auth": 3
+    "Role": 2
   },
   "models": {
     "User": {},
+    "ApiUser": {
+      "1": "{\"username\":\"watson\",\"password\":\"$2a$10$R0h5NPss1gQXx/C3bNBowOWMfV7D.oZDvtrZ6KowsT1F8DAz6CFH6\",\"email\":\"watson@ibm.com\",\"id\":1}",
+      "2": "{\"username\":\"admin\",\"password\":\"$2a$10$ZZeunUjY1j5I44jBTjnkHeLLcUP3VJGy6Dky2I730qHXJTx/DekUG\",\"email\":\"admin@ibm.com\",\"roles\":[\"admin\"],\"id\":2}",
+      "3": "{\"username\":\"vmware\",\"password\":\"$2a$10$JnpFhYUDuN6.ndW9TNjQwe0QNWMC7vifoTw85FNr6ADYeIY573zWm\",\"email\":\"watson@vmware.com\",\"id\":3}"
+    },
     "AccessToken": {
-      "EvF36JvSGz89xOGbdaRUW4XZGCEhCknqSIyEScDV3Gu5WX90TVqjOOWLmViDQcov": "{\"id\":\"EvF36JvSGz89xOGbdaRUW4XZGCEhCknqSIyEScDV3Gu5WX90TVqjOOWLmViDQcov\",\"ttl\":3600,\"created\":\"2018-02-20T15:07:17.115Z\",\"userId\":2}",
-      "lzi3GjAdUt4w4CwwsyRLe1GpswVBa54bAvugEjYD3agqvs7FMcLUIQ5Ip36mMlX0": "{\"id\":\"lzi3GjAdUt4w4CwwsyRLe1GpswVBa54bAvugEjYD3agqvs7FMcLUIQ5Ip36mMlX0\",\"ttl\":3600,\"created\":\"2018-02-20T15:10:13.296Z\",\"userId\":2}"
+      "5pW15vXxVDBDmVtEONqoJvKnuoHj5F3OphnedAZ8hoA5zJV6wzuwlz33SbC55zEa": "{\"id\":\"5pW15vXxVDBDmVtEONqoJvKnuoHj5F3OphnedAZ8hoA5zJV6wzuwlz33SbC55zEa\",\"ttl\":1209600,\"created\":\"2018-11-06T22:15:42.312Z\",\"userId\":1}",
+      "ZH5HUDnAI7oR3K7H6hinamQ8myUqCDXHu4OtXcBNQcmncedCXNgyykAdthKthXKd": "{\"id\":\"ZH5HUDnAI7oR3K7H6hinamQ8myUqCDXHu4OtXcBNQcmncedCXNgyykAdthKthXKd\",\"ttl\":1209600,\"created\":\"2018-11-06T22:23:21.051Z\",\"userId\":1}",
+      "bzLIBfvUVAe3g4NBGAbeGODtuVMHdqbQmJKRFk0ZS1xexhnft1TJed2ZptN1JoCB": "{\"id\":\"bzLIBfvUVAe3g4NBGAbeGODtuVMHdqbQmJKRFk0ZS1xexhnft1TJed2ZptN1JoCB\",\"ttl\":1209600,\"created\":\"2018-11-06T22:56:30.239Z\",\"userId\":1}",
+      "XZQ01cZ0Yd460unxB1UTSYRAxmlEOzZiNUUnCHQKLOiDLeh1VEF4VymDolb3YDqj": "{\"id\":\"XZQ01cZ0Yd460unxB1UTSYRAxmlEOzZiNUUnCHQKLOiDLeh1VEF4VymDolb3YDqj\",\"ttl\":1209600,\"created\":\"2018-11-06T22:57:39.839Z\",\"userId\":1}"
     },
     "ACL": {},
     "RoleMapping": {
       "1": "{\"principalType\":\"USER\",\"principalId\":\"2\",\"roleId\":1,\"id\":1}"
     },
     "Role": {
-      "1": "{\"name\":\"admin\",\"created\":\"2017-06-09T13:55:36.777Z\",\"modified\":\"2017-06-09T13:55:36.777Z\",\"id\":1}"
-    },
-    "Auth": {
-      "1": "{\"username\":\"watson\",\"password\":\"$2a$10$AHvEXtFAfMVTciaPB2g3L.33RS63hy.YL0rQgLbV701jTB3yp05eG\",\"email\":\"watson@ibm.com\",\"id\":1}",
-      "2": "{\"username\":\"admin\",\"password\":\"$2a$10$tkSzSy5s/jg1DNP5DIrQ/OWXGDxjGbc0Pgu3WVNAv/vI1s49N5LD.\",\"email\":\"admin@ibm.com\",\"id\":2}"
+      "1": "{\"name\":\"admin\",\"created\":\"2018-10-15T21:25:11.218Z\",\"modified\":\"2018-10-15T21:25:11.218Z\",\"id\":1}"
     }
   }
 }

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output, AfterViewInit } from '@angular/core'
 
 @Component({
-  selector: 'wsl-chat-input',
+  selector: 'app-chat-input',
   templateUrl: './chat-input.component.html',
   styleUrls: ['./chat-input.component.css']
 })

@@ -1,19 +1,20 @@
+#iphone-notch {
+  position: relative;
+  bottom: 16px;
+  right: 15px;
+  width: 304px;
+}
+
 #watsonOrb{
-  height:29px;
-  width:29px;
-  float:left;
-  position:relative;
-  top:-4px;
-  margin-right:5px;
-  margin-top:5px;
-  margin-left:5px;
-  margin-bottom:3px;
+  height:80px;
+  width:80px;
 }
 
 #input{
   margin-left:4px;
   position: absolute;
   bottom:2px;
+  z-index: 2000;
 }
 
 #input_box{
@@ -23,7 +24,7 @@
 #scrolling-chat-box{
   overflow-x: hidden;
   overflow-y: auto;
-  max-height: 280px;
+  max-height: 490px;
   padding:0px;
   padding-top:6px;
 }
@@ -31,18 +32,21 @@
 .chatWidget{
   background-color:white;
   margin:0px;
-  height:322px;
-  width:204px;
-  padding-left:6px;
-  padding-right:6px;
+  height:522px;
+  width:302px;
+  padding-top:8px;
+  padding-left:12px;
+  padding-right:12px;
 }
 
 #chatHeader{
-  background-color:#152935;
-  color:white;
-  height:36px;
-  width:204px;
-  margin:0px;
+  color:black;
+  height:90px;
+  background-color:lightgray;
+  padding-top:15px;
+  margin: 0px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
 }
 
 .sub-text{
