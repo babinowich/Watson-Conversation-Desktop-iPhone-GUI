@@ -3,7 +3,7 @@
   border-radius:0px;
   border-bottom: 3px solid gray;
   /* margin-bottom: 1px; */
-  width:270px;
+  width:240px;
   padding:0px;
   font-size:16px;
 }
@@ -23,6 +23,7 @@
   border-radius:5px !important;
   padding:0px;
   margin-left:6px;
+  font-size:25px;
 }
 
 /deep/ #sendButton:hover{

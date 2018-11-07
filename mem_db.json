@@ -2,7 +2,7 @@
   "ids": {
     "User": 1,
     "ApiUser": 4,
-    "AccessToken": 87,
+    "AccessToken": 88,
     "ACL": 1,
     "RoleMapping": 2,
     "Role": 2
@@ -15,10 +15,7 @@
       "3": "{\"username\":\"vmware\",\"password\":\"$2a$10$JnpFhYUDuN6.ndW9TNjQwe0QNWMC7vifoTw85FNr6ADYeIY573zWm\",\"email\":\"watson@vmware.com\",\"id\":3}"
     },
     "AccessToken": {
-      "5pW15vXxVDBDmVtEONqoJvKnuoHj5F3OphnedAZ8hoA5zJV6wzuwlz33SbC55zEa": "{\"id\":\"5pW15vXxVDBDmVtEONqoJvKnuoHj5F3OphnedAZ8hoA5zJV6wzuwlz33SbC55zEa\",\"ttl\":1209600,\"created\":\"2018-11-06T22:15:42.312Z\",\"userId\":1}",
-      "ZH5HUDnAI7oR3K7H6hinamQ8myUqCDXHu4OtXcBNQcmncedCXNgyykAdthKthXKd": "{\"id\":\"ZH5HUDnAI7oR3K7H6hinamQ8myUqCDXHu4OtXcBNQcmncedCXNgyykAdthKthXKd\",\"ttl\":1209600,\"created\":\"2018-11-06T22:23:21.051Z\",\"userId\":1}",
-      "bzLIBfvUVAe3g4NBGAbeGODtuVMHdqbQmJKRFk0ZS1xexhnft1TJed2ZptN1JoCB": "{\"id\":\"bzLIBfvUVAe3g4NBGAbeGODtuVMHdqbQmJKRFk0ZS1xexhnft1TJed2ZptN1JoCB\",\"ttl\":1209600,\"created\":\"2018-11-06T22:56:30.239Z\",\"userId\":1}",
-      "XZQ01cZ0Yd460unxB1UTSYRAxmlEOzZiNUUnCHQKLOiDLeh1VEF4VymDolb3YDqj": "{\"id\":\"XZQ01cZ0Yd460unxB1UTSYRAxmlEOzZiNUUnCHQKLOiDLeh1VEF4VymDolb3YDqj\",\"ttl\":1209600,\"created\":\"2018-11-06T22:57:39.839Z\",\"userId\":1}"
+      "BrQkUEfWB3Frt6Jmana1PMjb9xaMWAaScCByXtHHZBGlm9I69OwVO5iAIfAHt92B": "{\"id\":\"BrQkUEfWB3Frt6Jmana1PMjb9xaMWAaScCByXtHHZBGlm9I69OwVO5iAIfAHt92B\",\"ttl\":1209600,\"created\":\"2018-11-07T18:32:55.516Z\",\"userId\":1}"
     },
     "ACL": {},
     "RoleMapping": {

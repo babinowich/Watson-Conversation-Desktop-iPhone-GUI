@@ -1,11 +1,12 @@
 <div *ngIf="message.type==='conversation'" [@flyIn]="message.speaker">
-	<p
-	[ngClass]=
-		"{ watsontext: message.speaker==='watson',
-			 humantext: message.speaker==='human',
-			 anger: message.emotion==='frustrated' && message.emoStrong || message.emotion==='impolite' && message.emoStrong,
-		   sadness: message.emotion==='sad' && message.emoStrong}">
-			{{ message.message }}
+	<p [ngClass]= "{
+			watsontext: message.speaker==='watson',
+			humantext: message.speaker==='human',
+			anger: message.emotion==='frustrated' && message.emotionStrong || message.emotion==='impolite' && message.emotionStrong,
+			sadness: message.emotion==='sad' && message.emotionStrong
+		}"
+	>
+		{{ message.message }}
 	</p>
 	<div class="row" *ngIf="message.emotion==='frustrated'  && message.emoStrong || message.emotion==='impolite'  && message.emoStrong" class="emotionBar">
 		<i class="fa fa-exclamation-circle" aria-hidden="true" matTooltip="{{ message.emoConfidence | percent: '1.0-2'}} {{ message.emotion }}"></i>
@@ -22,7 +23,6 @@
 	            <div class="credit-card-div">
 	                <div class="panel panel-default">
 	                    <div class="panel-heading">
-
 	                        <div class="row">
 	                            <div class="col-md-12 col-sm-12 col-xs-12">
 	                                <h5 class="text-muted">Bank Info</h5>
@@ -38,18 +38,15 @@
 	                                <input type="text" class="form-control" placeholder="xxxx" />
 	                            </div>
 	                        </div>
-	                        <div class="row ">
+	                        <div class="row">
 	                            <div class="col-md-12 col-sm-12 col-xs-12 pad-adjust">
 	                                <input type="submit" class="btn btn-danger" value="CANCEL" />
 	                            </div>
-															<div class="col-md-12 col-sm-12 col-xs-12 pad-adjust">
-
-															</div>
+								<div class="col-md-12 col-sm-12 col-xs-12 pad-adjust"></div>
 	                            <div class="col-md-12 col-sm-12 col-xs-12 pad-adjust">
 	                                <input type="submit" class="btn btn-warning btn-block" value="PAY NOW" (click)="submit()"/>
 	                            </div>
 	                        </div>
-
 	                    </div>
 	                </div>
 	            </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 
 import { WatsonAssistant } from './shared/services/assistant.service'
 import { WatsonDiscovery } from './shared/services/discovery.service'
@@ -14,14 +14,11 @@ import { Utterance } from './shared/classes/utterance'
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
-  // @Output() convoResponse: EventEmitter<any> = new EventEmitter()
-  @Output() openchat: EventEmitter<boolean> = new EventEmitter<boolean>()
 
 // conversation variables
   text: string = ''
   context: any = {}
   convoArray: ChatMessage[] = []
-  chatIndex: number = 0
 
 // discovery variables
   discoveryArray = []
@@ -32,8 +29,6 @@ export class ChatComponent implements OnInit {
 // tone variables
   utteranceArray: Utterance[] = []
   emotionsArray: Emotion[] = []
-  isAngry: boolean = false
-  isSad: boolean = false
 
   constructor(
     private assistant: WatsonAssistant,
@@ -50,18 +45,7 @@ export class ChatComponent implements OnInit {
   postPending(): void {
     if (this.pending === false) {
       this.pending = true
-      this.convoArray.push(
-        new ChatMessage(
-          '...',
-          'human',
-          this.chatIndex++,
-          null,
-          null,
-          null,
-          null,
-          'conversation'
-        )
-      )
+      this.convoArray.push(new ChatMessage('...', 'human', 'conversation'))
       setTimeout(() => {
         this.scrollToBottomOfChat()
       }, 100)
@@ -80,33 +64,11 @@ export class ChatComponent implements OnInit {
     // pop the (...) human placeholder text
     this.convoArray.pop()
     // add the human text to the conversation the chat array
-    this.convoArray.push(
-      new ChatMessage(
-        text,
-        'human',
-        this.chatIndex++,
-        null,
-        null,
-        null,
-        null,
-        'conversation'
-      )
-    )
+    this.convoArray.push(new ChatMessage(text, 'human', 'conversation'))
     // add the input to the utterance array for ToneAnalyzer
     this.utteranceArray.push(new Utterance(text, 'customer'))
     // add a placeholder while getting responses back to wait for tone and conversation to come back
-    this.convoArray.push(
-      new ChatMessage(
-        '...',
-        'watson',
-        this.chatIndex++,
-        null,
-        null,
-        null,
-        null,
-        'conversation'
-      )
-    )
+    this.convoArray.push(new ChatMessage('...', 'watson', 'conversation'))
     setTimeout(() => {
       this.scrollToBottomOfChat()
       // this.scrollToInput()
@@ -130,59 +92,27 @@ export class ChatComponent implements OnInit {
         this.emotionsArray = response
         // find the item in the conversation array that we just got the tone for, and update the tone attributes for that item
         this.convoArray[this.convoArray.length - 2].emotion = emotions.lastPredom
-        this.convoArray[this.convoArray.length - 2].emoConfidence = response.lastPredomConf
+        this.convoArray[this.convoArray.length - 2].score = response.lastPredomConf
         // developer chosen thresholds for emotions - can change depending on use case
-        if (emotions.lastPredom === 'frustrated' && emotions.lastPredomConf > 0.68) {
+        if ((emotions.lastPredom === 'frustrated') || (emotions.lastPredom === 'impolite') && emotions.lastPredomConf > 0.68) {
           console.log('this guy is frustrated')
-          this.convoArray[this.convoArray.length - 2].emoStrong = true
+          this.convoArray[this.convoArray.length - 2].emotionStrong = true
           this.convoArray.pop()
           this.convoArray.push(
             new ChatMessage(
-              'Im sorry it looks like this conversation isnt going too well. ',
+              'I\'m sorry it looks like this conversation isnt going too well. You seem ' + emotions.lastPredom,
               'watson',
-              this.chatIndex++,
-              null,
-              null,
-              null,
-              null,
               'conversation'
-            ))
-          setTimeout(() => {
-            this.scrollToBottomOfChat()
-          }, 400)
-        } else if (emotions.lastPredom === 'impolite' && emotions.lastPredomConf > 0.6) {
-          console.log('this guy is impolite')
-          this.convoArray[this.convoArray.length - 2].emoStrong = true
-          this.convoArray.pop()
-          this.convoArray.push(
-            new ChatMessage(
-              'Im sorry it looks like this conversation isnt going too well. ',
-              'watson',
-              this.chatIndex++,
-              null,
-              null,
-              null,
-              null,
-              'conversation'
-            ))
+            )
+          )
           setTimeout(() => {
             this.scrollToBottomOfChat()
           }, 400)
         } else if (emotions.lastPredom === 'sad' && emotions.lastPredomConf > 0.7) {
           console.log('this guy is sad')
-          this.convoArray[this.convoArray.length - 2].emoStrong = true
+          this.convoArray[this.convoArray.length - 2].emotionStrong = true
           this.convoArray.pop()
-          this.convoArray.push(
-            new ChatMessage(
-              'Hey cheer up!',
-              'watson',
-              this.chatIndex++,
-              null,
-              null,
-              null,
-              null,
-              'showGif'))
-          this.isSad = false
+          this.convoArray.push(new ChatMessage('Hey cheer up!', 'watson', 'showGif'))
           setTimeout(() => {
             this.scrollToBottomOfChat()
           }, 400)
@@ -198,107 +128,69 @@ export class ChatComponent implements OnInit {
     this.assistant.sendMessage(text, this.context).subscribe(response => {
       console.log(response)
       this.convoArray.pop()
-      // if the conversation service has a discovery flag, let's call discovery
+    // if the conversation service has a discovery flag, let's call discovery
       if (response.output.call_discovery === true) {
         console.log('call discovery')
       // add a line indicating we are going to discovery for probabilistic answer
-        this.convoArray.push(
-          new ChatMessage(
-            'Let\'s see what we\'ve got...',
-            'watson',
-            this.chatIndex++,
-            null,
-            null,
-            null,
-            null,
-            'conversation'
-          )
-        )
+        this.convoArray.push(new ChatMessage('Let\'s see what we\'ve got...', 'watson', 'conversation'))
       // add the loading gear bubble
-        this.convoArray.push(
-          new ChatMessage(
-            '',
-            'watson',
-            this.chatIndex++,
-            null,
-            null,
-            null,
-            null,
-            'loading'
-          )
-        )
+        this.convoArray.push(new ChatMessage('', 'watson', 'loading'))
         const convoResponse = response.output.text[1]
         this.discovery.query(text).subscribe(data => {
           console.log(data)
           this.convoArray.pop()
           this.discoveryArray = data.results
           this.resultCount = data.matching_results
-          this.convoArray.push(
-            new ChatMessage(
-              this.discoveryArray[this.discoveryIndex].text,
-              'watson',
-              this.chatIndex++,
-              null,
-              null,
-              null,
-              this.discoveryArray[this.discoveryIndex].score * 10,
-              'discovery'
-            )
-          )
-          this.convoArray.push(
-            new ChatMessage(
-              convoResponse,
-              'watson',
-              this.chatIndex++,
-              null,
-              null,
-              null,
-              null,
-              'conversation'
-            )
-          )
+          const score = this.discoveryArray[this.discoveryIndex].score * 10
+          this.convoArray.push(new ChatMessage(this.discoveryArray[this.discoveryIndex].text, 'watson', 'discovery', null, null, score))
+          this.convoArray.push(new ChatMessage(convoResponse, 'watson', 'conversation'))
           setTimeout(() => {
             this.scrollToBottomOfChat()
             this.discoveryIndex ++
           }, 400)
         })
+    // if the conversation service has a credit card widget flag, let's call make a special chat bubble with the card payment
       } else if (response.output.credit_card_widget === true) {
-        console.log('show credit card widget')
-        this.convoArray.push(
-          new ChatMessage(
-            'Please enter your payment info below:',
-            'watson',
-            this.chatIndex++,
-            null,
-            null,
-            null,
-            null,
-            'payment'
-          )
-        )
+      // show credit card widget
+        this.convoArray.push(new ChatMessage('Please enter your payment info below:', 'watson', 'payment'))
       } else {
+    // if the conversation service had neither discovery now credit card flags, it's a normal Watson response
         console.log(response)
         response.output.text.forEach((line) => {
-          this.convoArray.push(
-            new ChatMessage(
-              line,
-              'watson',
-              this.chatIndex++,
-              null,
-              null,
-              null,
-              null,
-              'conversation'
-            )
-          )
+          this.convoArray.push(new ChatMessage(line, 'watson', 'conversation'))
         })
       }
       this.context = response.context
-      // this.convoResponse.emit(response)
       setTimeout(() => {
         this.scrollToBottomOfChat()
       }, 400)
     }, error => console.log(error))
+  }
+
+// method to completely reset the conversation, setting all context to empty, reposting empty message
+  refreshConvo() {
+    console.log('refreshing conversation')
+    this.context = {}
+    this.convoArray = []
+    this.discoveryArray = []
+    this.discoveryIndex = 0
+    this.pending = false
+    this.utteranceArray = []
+    this.emotionsArray = []
+    this.text = ''
+    this.postMessage('')
+  }
+
+// method to show another Discovery result
+  showMore() {
+    this.convoArray.pop()
+    const score = this.discoveryArray[this.discoveryIndex].score * 10
+    this.convoArray.push(new ChatMessage(this.discoveryArray[this.discoveryIndex].text, 'watson', 'discovery', null, null, score))
+    this.discoveryIndex ++
+    this.convoArray.push(new ChatMessage('What else can I help with?', 'watson', 'conversation'))
+    setTimeout(() => {
+      this.scrollToBottomOfChat()
+    }, 100)
   }
 
 // view control methods
@@ -310,55 +202,6 @@ export class ChatComponent implements OnInit {
   scrollToInput() {
     const elmnt = document.getElementById('input_box')
     elmnt.scrollIntoView()
-  }
-
-  refreshConvo() {
-    console.log('refreshing conversation')
-    this.context = {}
-    this.convoArray = []
-    this.discoveryArray = []
-    this.discoveryIndex = 0
-    this.chatIndex = 0
-    this.pending = false
-    this.utteranceArray = []
-    this.emotionsArray = []
-    this.isAngry = false
-    this.isSad = false
-    this.text = ''
-    this.postMessage('')
-  }
-
-  showMore() {
-    console.log('wants to see more results')
-    this.convoArray.pop()
-    this.convoArray.push(
-      new ChatMessage(
-        this.discoveryArray[this.discoveryIndex].passage_text,
-        'watson',
-        this.chatIndex++,
-        null,
-        null,
-        null,
-        this.discoveryArray[this.discoveryIndex].passage_score * 10,
-        'discovery'
-      )
-    )
-    this.discoveryIndex ++
-    this.convoArray.push(
-      new ChatMessage(
-        'What else can I help with?',
-        'watson',
-        this.chatIndex++,
-        null,
-        null,
-        null,
-        null,
-        'conversation'
-      )
-    )
-    setTimeout(() => {
-      this.scrollToBottomOfChat()
-    }, 100)
   }
 
 }
